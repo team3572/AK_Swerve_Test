@@ -16,6 +16,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Threads;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
@@ -33,6 +37,9 @@ import org.littletonrobotics.urcl.URCL;
 public class Robot extends LoggedRobot {
   private Command autonomousCommand;
   private RobotContainer robotContainer;
+
+  // Creating an empty HashMap
+  Map<Integer, String> SparkCANIDMap = new HashMap<Integer, String>();
 
   public Robot() {
     // Record metadata
@@ -75,8 +82,16 @@ public class Robot extends LoggedRobot {
         break;
     }
 
-    // Initialize URCL
-    Logger.registerURCL(URCL.startExternal());
+    // Initialize URCL - Unofficial REV-Compatible Logger from AdvantageKit
+    SparkCANIDMap.put(3,"DriveFrontRight");
+    SparkCANIDMap.put(2,"DriveFrontLeft");
+    SparkCANIDMap.put(5,"DriveBackRight");
+    SparkCANIDMap.put(4,"DriveBackLeft");
+    SparkCANIDMap.put(7,"TurnFrontRight");
+    SparkCANIDMap.put(6,"TurnFrontLeft");
+    SparkCANIDMap.put(9,"TurnBackRight");
+    SparkCANIDMap.put(8,"TurnBackLeft");
+    Logger.registerURCL(URCL.startExternal(SparkCANIDMap));
 
     // Start AdvantageKit logger
     Logger.start();
