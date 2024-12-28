@@ -16,10 +16,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Threads;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
@@ -83,14 +81,14 @@ public class Robot extends LoggedRobot {
     }
 
     // Initialize URCL - Unofficial REV-Compatible Logger from AdvantageKit
-    SparkCANIDMap.put(3,"DriveFrontRight");
-    SparkCANIDMap.put(2,"DriveFrontLeft");
-    SparkCANIDMap.put(5,"DriveBackRight");
-    SparkCANIDMap.put(4,"DriveBackLeft");
-    SparkCANIDMap.put(7,"TurnFrontRight");
-    SparkCANIDMap.put(6,"TurnFrontLeft");
-    SparkCANIDMap.put(9,"TurnBackRight");
-    SparkCANIDMap.put(8,"TurnBackLeft");
+    SparkCANIDMap.put(3, "DriveFrontRight");
+    SparkCANIDMap.put(2, "DriveFrontLeft");
+    SparkCANIDMap.put(5, "DriveBackRight");
+    SparkCANIDMap.put(4, "DriveBackLeft");
+    SparkCANIDMap.put(7, "TurnFrontRight");
+    SparkCANIDMap.put(6, "TurnFrontLeft");
+    SparkCANIDMap.put(9, "TurnBackRight");
+    SparkCANIDMap.put(8, "TurnBackLeft");
     Logger.registerURCL(URCL.startExternal(SparkCANIDMap));
 
     // Start AdvantageKit logger

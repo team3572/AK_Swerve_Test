@@ -302,6 +302,41 @@ public class Drive extends SubsystemBase {
     poseEstimator.resetPosition(rawGyroRotation, getModulePositions(), pose);
   }
 
+  /**
+   * Zeroes the gyroscope. This sets the current rotation of the robot to zero degrees. This method
+   * is intended to be invoked only when the alignment beteween the robot's rotation and the gyro is
+   * sufficiently different to make field-relative driving difficult. The robot needs to be
+   * positioned facing away from the driver, ideally aligned to a field wall before this method is
+   * invoked.
+   */
+  public void zeroGyroscope() {
+    setGyroOffset(0.0);
+  }
+
+  /**
+   * Sets the rotation of the robot to the specified value. This method should only be invoked when
+   * the rotation of the robot is known (e.g., at the start of an autonomous path). Zero degrees is
+   * facing away from the driver station; CCW is positive.
+   *
+   * @param expectedYaw the rotation of the robot (in degrees)
+   */
+  public void setGyroOffset(double expectedYaw) {
+    // There is a delay between setting the yaw on the Pigeon and that change
+    // taking effect. As a result, it is recommended to never set the yaw and
+    // adjust the local offset instead.
+    this.gyroIO.resetPositionToZero();
+    // if (gyroInputs.connected) {
+    // this.gyroOffset = expectedYaw - gyroInputs.positionDeg;
+    // } else {
+    // this.gyroOffset = 0;
+    // this.estimatedPoseWithoutGyro =
+    // new Pose2d(
+    // estimatedPoseWithoutGyro.getX(),
+    // estimatedPoseWithoutGyro.getY(),
+    // Rotation2d.fromDegrees(expectedYaw));
+    // }
+  }
+
   /** Adds a new timestamped vision measurement. */
   public void addVisionMeasurement(
       Pose2d visionRobotPoseMeters,

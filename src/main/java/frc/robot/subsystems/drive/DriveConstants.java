@@ -35,13 +35,13 @@ public class DriveConstants {
 
   // Zeroed rotation values for each module, see setup instructions
   // Rotation2d(2.520);
-  public static final Rotation2d frontLeftZeroRotation = new Rotation2d(0.0);
+  public static final Rotation2d frontLeftZeroRotation = new Rotation2d(2.52);
   // Rotation2d(-1.132);
-  public static final Rotation2d frontRightZeroRotation = new Rotation2d(0.0);
+  public static final Rotation2d frontRightZeroRotation = new Rotation2d(-1.132);
   // Rotation2d(0.954);
-  public static final Rotation2d backLeftZeroRotation = new Rotation2d(0.0);
+  public static final Rotation2d backLeftZeroRotation = new Rotation2d(0.954);
   // Rotation2d(1.621);
-  public static final Rotation2d backRightZeroRotation = new Rotation2d(0.0);
+  public static final Rotation2d backRightZeroRotation = new Rotation2d(1.621);
 
   // Device CAN IDs
   public static final int pigeonCanId = 19;
@@ -77,6 +77,7 @@ public class DriveConstants {
           * wheelRadiusMeters;
 
   // Drive encoder configuration
+  public static final boolean driveInverted = false;
   public static final double driveEncoderPositionFactor =
       2 * Math.PI / driveMotorReduction; // Rotor Rotations -> Wheel Radians
   public static final double driveEncoderVelocityFactor =
@@ -93,20 +94,19 @@ public class DriveConstants {
   public static final double driveSimKv = 0.0789;
 
   // Turn motor configuration
-  public static final boolean turnInverted = false;
+  public static final boolean turnInverted = true;
   public static final int turnMotorCurrentLimit = 20;
   public static final double turnMotorReduction = 150.0 / 7.0; // SDS MK4i L2
   public static final DCMotor turnGearbox = DCMotor.getNEO(1);
 
   // Turn encoder configuration
-  public static final boolean turnEncoderInverted = true;
   public static final double turnEncoderPositionFactor =
       2 * Math.PI / turnMotorReduction; // Rotor Rotations -> Wheel Radians
   public static final double turnEncoderVelocityFactor =
       (2 * Math.PI) / 60.0 / turnMotorReduction; // Rotor RPM -> Wheel Rad/Sec
 
   // Turn PID configuration
-  public static final double turnKp = 2.0;
+  public static final double turnKp = 1.0;
   public static final double turnKd = 0.0;
   public static final double turnSimP = 8.0;
   public static final double turnSimD = 0.0;
