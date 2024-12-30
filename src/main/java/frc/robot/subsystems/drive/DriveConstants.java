@@ -68,7 +68,7 @@ public class DriveConstants {
 
   // Drive motor configuration
   public static final int driveMotorCurrentLimit = 50;
-  public static final double wheelRadiusMeters = Units.inchesToMeters(0.95493);
+  public static final double wheelRadiusMeters = Units.inchesToMeters(3.0);
   public static final double driveMotorReduction =
       (50.0 / 14.0) * (17.0 / 27.0) * (45.0 / 15.0); // Gear ratios for
   // SDS MK4i L2
@@ -98,8 +98,11 @@ public class DriveConstants {
   public static final double driveKv = 0.1;
   public static final double driveSimP = 0.05;
   public static final double driveSimD = 0.0;
-  public static final double driveSimKs = 0.0;
-  public static final double driveSimKv = 0.0789;
+  public static final double driveSimKs = 0.04307;
+  public static final double driveSimKv = 0.21126;
+
+  public static final double simStartX = 0.7;
+  public static final double simStartY = 1.69;
 
   // Turn motor configuration
   public static final boolean turnInverted = true;
@@ -124,7 +127,7 @@ public class DriveConstants {
   public static final double turnPIDMaxInput = 2 * Math.PI; // Radians
 
   // PathPlanner configuration
-  public static final double robotMassKg = 74.088;
+  public static final double robotMassKg = 54.43;
   public static final double robotMOI = 6.883;
   public static final double wheelCOF = 1.2;
   public static final RobotConfig ppConfig =

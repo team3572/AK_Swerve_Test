@@ -13,6 +13,9 @@
 
 package frc.robot;
 
+import static frc.robot.subsystems.drive.DriveConstants.simStartX;
+import static frc.robot.subsystems.drive.DriveConstants.simStartY;
+
 import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
@@ -62,7 +65,8 @@ public class RobotContainer {
         // create a maple-sim swerve drive simulation instance
         this.driveSimulation =
             new SwerveDriveSimulation(
-                DriveConstants.mapleSimConfig, new Pose2d(3, 3, new Rotation2d()));
+                DriveConstants.mapleSimConfig,
+                new Pose2d(simStartX, simStartY, new Rotation2d(2.0)));
         // add the simulated drivetrain to the simulation field
         SimulatedArena.getInstance().addDriveTrainSimulation(driveSimulation);
         // Sim robot, instantiate physics sim IO implementations
