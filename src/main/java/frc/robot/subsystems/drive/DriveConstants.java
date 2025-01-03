@@ -70,8 +70,7 @@ public class DriveConstants {
   public static final int driveMotorCurrentLimit = 50;
   public static final double wheelRadiusMeters = Units.inchesToMeters(2.0);
   public static final double driveMotorReduction =
-      (50.0 / 14.0) * (17.0 / 27.0) * (45.0 / 15.0); // Gear ratios for
-  // SDS MK4i L2
+      (50.0 / 14.0) * (17.0 / 27.0) * (45.0 / 15.0); // Gear ratios for SDS MK4i L2
   public static final DCMotor driveGearbox = DCMotor.getNEO(1);
 
   public static final double maxSpeedMetersPerSec =
@@ -101,8 +100,8 @@ public class DriveConstants {
   public static final double driveSimKs = 0.04307;
   public static final double driveSimKv = 0.21126;
 
-  public static final double simStartX = 0.7;
-  public static final double simStartY = 1.69;
+  public static final double simStartX = 2;
+  public static final double simStartY = 7;
 
   // Turn motor configuration
   public static final boolean turnInverted = true;

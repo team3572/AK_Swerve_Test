@@ -99,7 +99,12 @@ public class Robot extends LoggedRobot {
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
-    System.out.println(String.format("MaxSpped M/s: %.5f", DriveConstants.maxSpeedMetersPerSec));
+    System.out.println(
+        String.format("maxSpeedMetersPerSec: %.5f", DriveConstants.maxSpeedMetersPerSec));
+    System.out.println(
+        String.format("driveMotorReduction: %.5f", DriveConstants.driveMotorReduction));
+    System.out.println(
+        String.format("turnMotorReduction: %.5f", DriveConstants.turnMotorReduction));
   }
 
   /** This function is called periodically during all modes. */
