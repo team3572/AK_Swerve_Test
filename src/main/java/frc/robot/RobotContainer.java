@@ -13,8 +13,7 @@
 
 package frc.robot;
 
-import static frc.robot.subsystems.drive.DriveConstants.simStartX;
-import static frc.robot.subsystems.drive.DriveConstants.simStartY;
+import static frc.robot.subsystems.vision.VisionConstants.*;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -27,6 +26,10 @@ import frc.robot.commands.DriveCommands;
 import frc.robot.operator_interface.OISelector;
 import frc.robot.operator_interface.OperatorInterface;
 import frc.robot.subsystems.drive.*;
+import frc.robot.subsystems.vision.Vision;
+import frc.robot.subsystems.vision.VisionIO;
+import frc.robot.subsystems.vision.VisionIOPhotonVision;
+import frc.robot.subsystems.vision.VisionIOPhotonVisionSim;
 import org.ironmaple.simulation.SimulatedArena;
 import org.ironmaple.simulation.drivesims.SwerveDriveSimulation;
 import org.littletonrobotics.junction.Logger;
@@ -39,10 +42,11 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  private OperatorInterface oi = new OperatorInterface() {};
   // Subsystems
+  private final Vision vision;
   private final Drive drive;
   private SwerveDriveSimulation driveSimulation = null;
+  private OperatorInterface oi = new OperatorInterface() {};
 
   // Dashboard inputs
   private final LoggedDashboardChooser<Command> autoChooser;
@@ -59,6 +63,11 @@ public class RobotContainer {
                 new ModuleIOSpark(1),
                 new ModuleIOSpark(2),
                 new ModuleIOSpark(3));
+        vision =
+            new Vision(
+                drive::addVisionMeasurement,
+                new VisionIOPhotonVision(camera0Name, robotToCamera0),
+                new VisionIOPhotonVision(camera1Name, robotToCamera1));
         break;
 
       case SIM:
@@ -66,7 +75,8 @@ public class RobotContainer {
         this.driveSimulation =
             new SwerveDriveSimulation(
                 DriveConstants.mapleSimConfig,
-                new Pose2d(simStartX, simStartY, new Rotation2d(2.0)));
+                new Pose2d(
+                    DriveConstants.simStartX, DriveConstants.simStartY, new Rotation2d(2.0)));
         // add the simulated drivetrain to the simulation field
         SimulatedArena.getInstance().addDriveTrainSimulation(driveSimulation);
         // Sim robot, instantiate physics sim IO implementations
@@ -77,6 +87,13 @@ public class RobotContainer {
                 new ModuleIOSim(driveSimulation.getModules()[1]),
                 new ModuleIOSim(driveSimulation.getModules()[2]),
                 new ModuleIOSim(driveSimulation.getModules()[3]));
+        vision =
+            new Vision(
+                drive::addVisionMeasurement,
+                new VisionIOPhotonVisionSim(
+                    camera0Name, robotToCamera0, driveSimulation::getSimulatedDriveTrainPose),
+                new VisionIOPhotonVisionSim(
+                    camera1Name, robotToCamera1, driveSimulation::getSimulatedDriveTrainPose));
         break;
 
       default:
@@ -88,6 +105,8 @@ public class RobotContainer {
                 new ModuleIO() {},
                 new ModuleIO() {},
                 new ModuleIO() {});
+        // (Use same number of dummy implementations as the real robot)
+        vision = new Vision(drive::addVisionMeasurement, new VisionIO() {}, new VisionIO() {});
         break;
     }
 
@@ -160,7 +179,8 @@ public class RobotContainer {
 
   public void resetSimulationField() {
     if (Constants.currentMode != Constants.Mode.SIM) return;
-    driveSimulation.setSimulationWorldPose(new Pose2d(3, 3, new Rotation2d()));
+    driveSimulation.setSimulationWorldPose(
+        new Pose2d(DriveConstants.simStartX, DriveConstants.simStartY, new Rotation2d()));
     SimulatedArena.getInstance().resetFieldForAuto();
   }
 

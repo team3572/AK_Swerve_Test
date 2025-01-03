@@ -129,8 +129,8 @@ public class DriveConstants {
   // PathPlanner configuration
   public static final double robotMassKg = 54.43;
   public static final double robotMOI = 6.883;
-  public static final double wheelCOF =
-      1.0; // From https://www.vexrobotics.com/colsonperforma.html#attr-vex_resources
+  public static final double wheelCOF = 1.0; // From
+  // https://www.vexrobotics.com/colsonperforma.html#attr-vex_resources
   public static final RobotConfig ppConfig =
       new RobotConfig(
           robotMassKg,

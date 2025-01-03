@@ -16,6 +16,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Threads;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.drive.DriveConstants;
 import java.util.HashMap;
 import java.util.Map;
 import org.ironmaple.simulation.SimulatedArena;
@@ -98,6 +99,7 @@ public class Robot extends LoggedRobot {
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our autonomous chooser on the dashboard.
     robotContainer = new RobotContainer();
+    System.out.println(String.format("MaxSpped M/s: %.5f", DriveConstants.maxSpeedMetersPerSec));
   }
 
   /** This function is called periodically during all modes. */
