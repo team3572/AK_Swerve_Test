@@ -81,6 +81,7 @@ public class VisionIOPhotonVision implements VisionIO {
             new PoseObservation(
                 result.getTimestampSeconds(), // Timestamp
                 robotPose, // 3D pose estimate
+                robotPose.plus(robotToCamera),
                 multitagResult.estimatedPose.ambiguity, // Ambiguity
                 multitagResult.fiducialIDsUsed.size(), // Tag count
                 totalTagDistance / result.targets.size(), // Average tag distance
@@ -107,6 +108,7 @@ public class VisionIOPhotonVision implements VisionIO {
               new PoseObservation(
                   result.getTimestampSeconds(), // Timestamp
                   robotPose, // 3D pose estimate
+                  robotPose.plus(robotToCamera),
                   target.poseAmbiguity, // Ambiguity
                   1, // Tag count
                   cameraToTarget.getTranslation().getNorm(), // Average tag distance

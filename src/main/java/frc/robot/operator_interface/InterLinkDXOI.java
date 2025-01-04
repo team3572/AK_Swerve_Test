@@ -55,6 +55,10 @@ public class InterLinkDXOI implements OperatorInterface {
     return interLinkJoystickJoystickButtons[1]; // A Button - near upper left top side
   }
 
+  public Trigger getAngleDriveButton() {
+    return interLinkJoystickJoystickButtons[12]; // H Button - near right side, bottom most toggle
+  }
+
   @Override
   public Trigger getResetGyroButton() {
     return interLinkJoystickJoystickButtons[14]; // RESET Button

@@ -24,6 +24,7 @@ import edu.wpi.first.math.util.Units;
 import org.ironmaple.simulation.drivesims.COTS;
 import org.ironmaple.simulation.drivesims.SwerveModuleSimulation;
 import org.ironmaple.simulation.drivesims.configs.DriveTrainSimulationConfig;
+import org.ironmaple.simulation.drivesims.configs.SwerveModuleSimulationConfig;
 
 public class DriveConstants {
   public static final double odometryFrequency = 100.0; // Hz
@@ -70,7 +71,8 @@ public class DriveConstants {
   public static final int driveMotorCurrentLimit = 50;
   public static final double wheelRadiusMeters = Units.inchesToMeters(2.0);
   public static final double driveMotorReduction =
-      (50.0 / 14.0) * (17.0 / 27.0) * (45.0 / 15.0); // Gear ratios for SDS MK4i L2
+      (50.0 / 14.0) * (17.0 / 27.0) * (45.0 / 15.0); // Gear ratios for
+  // SDS MK4i L2
   public static final DCMotor driveGearbox = DCMotor.getNEO(1);
 
   public static final double maxSpeedMetersPerSec =
@@ -143,21 +145,22 @@ public class DriveConstants {
               1),
           moduleTranslations);
 
+  public static final SwerveModuleSimulationConfig smsConfig =
+      new SwerveModuleSimulationConfig(
+          driveGearbox,
+          turnGearbox,
+          driveMotorReduction,
+          turnMotorReduction,
+          Volts.of(0.1),
+          Volts.of(0.1),
+          Meters.of(wheelRadiusMeters),
+          KilogramSquareMeters.of(0.02),
+          wheelCOF);
+
   public static final DriveTrainSimulationConfig mapleSimConfig =
       DriveTrainSimulationConfig.Default()
           .withCustomModuleTranslations(moduleTranslations)
           .withRobotMass(Kilogram.of(robotMassKg))
           .withGyro(COTS.ofPigeon2())
-          .withSwerveModule(
-              () ->
-                  new SwerveModuleSimulation(
-                      driveGearbox,
-                      turnGearbox,
-                      driveMotorReduction,
-                      turnMotorReduction,
-                      Volts.of(0.1),
-                      Volts.of(0.1),
-                      Meters.of(wheelRadiusMeters),
-                      KilogramSquareMeters.of(0.02),
-                      wheelCOF));
+          .withSwerveModule(() -> new SwerveModuleSimulation(smsConfig));
 }

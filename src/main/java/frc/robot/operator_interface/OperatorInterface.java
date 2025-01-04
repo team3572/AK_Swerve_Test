@@ -37,6 +37,10 @@ public interface OperatorInterface {
     return new Trigger(() -> false);
   }
 
+  public default Trigger getAngleDriveButton() {
+    return new Trigger(() -> false);
+  }
+
   public default Trigger getResetGyroButton() {
     return new Trigger(() -> false);
   }

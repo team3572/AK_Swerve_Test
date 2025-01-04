@@ -34,6 +34,7 @@ public interface VisionIO {
   public static record PoseObservation(
       double timestamp,
       Pose3d pose,
+      Pose3d cameraPose,
       double ambiguity,
       int tagCount,
       double averageTagDistance,

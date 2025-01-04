@@ -182,6 +182,7 @@ public class RobotContainer {
     driveSimulation.setSimulationWorldPose(
         new Pose2d(DriveConstants.simStartX, DriveConstants.simStartY, new Rotation2d()));
     SimulatedArena.getInstance().resetFieldForAuto();
+    drive.setPose(new Pose2d(DriveConstants.simStartX, DriveConstants.simStartY, new Rotation2d()));
   }
 
   public void displaySimFieldToAdvantageScope() {
